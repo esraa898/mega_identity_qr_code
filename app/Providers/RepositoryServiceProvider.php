@@ -29,6 +29,18 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Http\Interfaces\LinksInterface',
             'App\Http\Repositories\LinksRepository'
         );
+        $this->app->bind(
+            'App\Http\Interfaces\QrCodeGeneratorInterface',
+            'App\Http\Repositories\QrCodeGeneratorRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\RoleAdminInterface',
+            'App\Http\Repositories\RoleAdminRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\UserInterface',
+            'App\Http\Repositories\UserRepository'
+        );
     }
 
     /**

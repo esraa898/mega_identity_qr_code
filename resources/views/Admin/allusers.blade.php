@@ -80,11 +80,10 @@
 												<td> <a href="{{url('admin/userlinks',[$user->id])}}">{{$user->name}} links</a></td>
 												<td> {{$user->location}}</td>
 												<td>
-													<!-- @foreach($user->roles as $role)
-													 <a class="modal-effect  btn  btn-sm btn-info" data-effect="effect-scale" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-email="{{ $user->email }}"   data-toggle="modal"
-													 href="#modaldemo8" title="changerole" ></a>
-													  @endforeach   -->
-                                            {{$role->display_name}}		
+													 @foreach($user->roles as $role)
+													 <a  class= "btn btn-info" href= "{{url('admin/rolechange',[$user->id])}}">   {{$role->display_name}} </a> 		
+													  @endforeach   
+                                            		
 												</td>
 												<td>    
                                                   <a class="btn btn-info" href="{{url('enduser',[$user->id])}}"> View Card</a>          </td> 
@@ -186,16 +185,16 @@ title="update"><i class="las la-pen"></i></a>
 					<div class="modal-body">
                     <form   method="post" action="{{url('admin/rolechange')}}" autocomplete="off" enctype="multipart/form-data">
 					     @method('PUT')
-                         @csrf
+                         @csrf 
 									<div class="form-group">
 									<input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
                                     <label class="form-label mg-b-0"> Name</label>
-										<input type="text" class="form-control" id="name" name="name"  >
+										<input type="text" class="form-control" id="name" name="name"   value="{{$user->name}}">
 									</div>
 
                                     <div class="checkbox">
                                     <label class="form-label mg-b-0"> email</label>
-									<input type="text" class="form-control" id="email" name="email" >
+									<input type="text" class="form-control" id="email" name="email" value="{{$user->email}}">
 								
 									</div>
 									<div class="checkbox">
@@ -215,8 +214,8 @@ title="update"><i class="las la-pen"></i></a>
 							
 				
                     <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">ok</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                            <button type="submit" class="btn btn-success">C</button>
+                       
                         </div>
 					
                 </form>	

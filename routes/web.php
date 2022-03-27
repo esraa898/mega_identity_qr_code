@@ -38,6 +38,7 @@ Route::get('/user', [HomeController::class, 'index']);
 Route::group(['prefix'=>'admin'],function (){
 Route::get('/users',[RoleAdminController::class,'index']);
 Route::get('/userlinks/{id}',[RoleAdminController::class,'links']);
+Route::get('/rolechange/{id}',[RoleAdminController::class,'editRole']);
 Route::put('/rolechange',[RoleAdminController::class,'roleChange']);
 
 });

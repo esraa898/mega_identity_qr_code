@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Interfaces\RoleAdminInterface;
 use App\Models\link;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,41 +10,33 @@ use Illuminate\Http\Request;
 class RoleAdminController extends Controller
 {
     
+ protected $RoleAdminInterface;
+  public function __construct(RoleAdminInterface $roleAdminInterface ){
 
-  public function __construct(){
-
-
+  $this->RoleAdminInterface=$roleAdminInterface;
     $this->middleware(['role:Superadmin']);
   }
 
 
     public function index(){
-        $users= User::with('links')->get();
-
-        return view( 'Admin.allusers',compact('users'));
+ 
+      return $this->RoleAdminInterface->index();
     }
 
     public function links($id){
-      $links= link::with('icon')->where('user_id',$id)->get();
-
-      return view('links.userlinks',compact('links'));
+     
+      return $this->RoleAdminInterface->links($id);
     }
 
+    public function editRole($id){
+      return $this->RoleAdminInterface->editRole($id);
 
+
+    }
     public function roleChange(Request $request ,User $user){
   
 
-     
-    $request->validate([
-      'name' =>'required',
-      'roles' => 'required|array|min:1'
-    ]);
-    $requestdata =$request->except('email');
-    $user->update($requestdata);
-  
-    dd($user->syncRoles($request->roles,$request->user_id));
-
-  return  back();
+     return $this->RoleAdminInterface->roleChange($request,$user);
 
     }
 }

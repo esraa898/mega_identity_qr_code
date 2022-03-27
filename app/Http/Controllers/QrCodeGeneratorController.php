@@ -8,38 +8,36 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Interfaces\QrCodeGeneratorInterface;
 
 class QrCodeGeneratorController extends Controller
 {
+
+
+    protected $QrCodeGeneratorInteface ;
+
+
+    public function __construct(QrCodeGeneratorInterface  $qrCodeGeneratorInterface)
+    {
+        $this->QrCodeGeneratorInteface =$qrCodeGeneratorInterface;
+    }
+
+
     public function index()
     {
-        $user=Auth::user()->id;
-       
-        $qrname= 'Qr/'.$user.'.png';
-        return view('Qr.viewQr',compact('qrname'));
+        return  $this->QrCodeGeneratorInteface->index();
     }
 
     public function create(){
 
-        return view('Qr.qrCode');
+        return  $this->QrCodeGeneratorInteface->create();
     }
 
      public function store(){
         
 
-        
-        $user =Auth::user()->id;
-        $url = "http://127.0.0.1:8000/enduser/".$user;
-         QrCode::format('png')->size(150)->generate($url,public_path('Qr/'.$user.'.png'));
-        
-         $qrname= 'Qr/'.$user.'.png';
-        if(!(qr_img::where('Qr-img', '=', $qrname)->exists())){
-            $qr= qr_img::create([
-            'Qr-img'=>$qrname,
-            'user_id'=>Auth::user()->id
-        ]);
-        }   
-    return view('Qr.viewQr',compact('qrname'));
+         
+    return  $this->QrCodeGeneratorInteface->store();
      }
 
 
