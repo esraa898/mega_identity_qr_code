@@ -76,10 +76,11 @@ class LinksRepository implements LinksInterface{
 
   
 
-  public function delete($id)
-  {
-    $query = Link::find($id);
-    $query->delete();
+  public function delete($request)
+  {   
+    $id= $request->link_id;
+    $link = Link::find($id);
+    $link->delete();
     session()->flash('done','deleted succesfully');
     return  redirect('links');
   }

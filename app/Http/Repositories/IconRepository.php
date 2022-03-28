@@ -66,7 +66,9 @@ class IconRepository implements IconInterface{
  
      }
  
-     public function delete($id){
+     public function delete($request){
+
+        $id= $request->icon_id;
          $icon =iconModel::find($id);
        
          $oldfile= 'images\icons\\'.$icon->icon;

@@ -79,13 +79,14 @@
 								<td> <a href="{{url('/links')}}">{{$user->name}} links</a></td>
 								<td> {{$user->location}}</td>
 								<td>
-									<a class="btn btn-info" href="{{url('enduser',[$user->id])}}"> View Card</a>
+									<a class="btn btn-sm btn-info" href="{{url('enduser',[$user->id])}}"> View Card</a>
 								</td>
 								<td>
 								<td>
 
 									<a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-id="{{ $user->id }}" data-name="{{ $user->name  }}" data-title="{{ $user->title }}" data-phone_number="{{ $user->phone_number }}" data-location="{{ $user->location }}" data-password="{{ $user->password }}" data-toggle="modal" href="#exampleModal2" title="update"><i class="las la-pen"></i></a>
-
+								</td>
+								<td>
 									<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" href="#modaldemo9" title="delete"><i class="las la-trash"></i></a>
 
 								</td>

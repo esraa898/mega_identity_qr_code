@@ -44,7 +44,9 @@
 						<div class="card">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-								
+								<div class="col-sm-6 col-md-4 col-xl-3">
+										<a class="modal-effect btn btn-outline-primary btn-block"   href="{{ url('icon/create')}}">  Add  Icon  </a>
+									</div>
 									<i class="mdi mdi-dots-horizontal text-gray"></i>
 								</div>
 								
@@ -55,9 +57,12 @@
 
 										<thead>
 											<tr>
-												<th>ID</th>
-												<th>icon name</th>
-												<th colspan="2"> Action</th>
+												<th class=" border-bottom-0">ID</th>
+												<th class=" border-bottom-0">icon name</th>
+												<th class=" border-bottom-0">
+													icon img
+												</th>
+												<th  class=" border-bottom-0" colspan="2"> Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -66,14 +71,23 @@
 												<th scope="row">{{++ $key}}</th>
 												<td>{{$icon->name}}</td>
 												<td><img src="{{asset('images/icons/'.$icon->icon)}}"/></td>
-												<td>
+												<td class="pr-0">
 
                                           <a class=" btn btn-sm btn-info"  href="{{url('icon/edit',[$icon->id])}}"  title="update"><i class="las la-pen"></i></a>
-
-							        	 <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-id="{{ $icon->id }}" data-name="{{ $icon->name }}" data-toggle="modal" href="#modaldemo9" title="delete"><i class="las la-trash"></i></a>
-
-                                     </td>
-									</tr>
+												</td>
+												<td class="my-0">
+										  
+                                                        <form method="post"  action="{{url('icon/delete') }}">
+                                                            @csrf 
+                                                            @method('DELETE')
+                                                            <input type="hidden"name="icon_id" value="{{$icon->id}}">
+                                                        <button class="btn  btn-sm btn-danger">   
+														<i class="las la-trash"></i>
+                                                        </button>
+                                                     </form>
+						
+			 
+											</tr>
 						
 											@endforeach
 										</tbody>
@@ -92,35 +106,7 @@
 
 					 
                                     
-					
-				 <!--  delete form  -->
-				 <div class="modal" id="modaldemo9" >
-			<div class="modal-dialog" role="document">
-				<div class="modal-content modal-content-demo">
-					<div class="modal-header">
-						<h6 class="modal-title">Delete </h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-                    <form   method="post" action="{{url('icon/delete',[$icon->id])}}" autocomplete="off">
-					     @method('delete')
-                         @csrf
-						 <div class="modal-body">
-                                        <p>   Are you sure you want to delete this icon ?    </p><br>
-                                        <input type="hidden" name="id" id="id" value="">
-                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-                                        <button type="submit" class="btn btn-danger">yes</button>
-                                    </div>
-		
-											
 				
-                </form>	
-            </div>
-				</div>  
-			</div>
-		</div>
 			
 		
 				</div>
@@ -131,14 +117,4 @@
 		<!-- main-content closed -->
 @endsection
 @section('js')
-<script>
-        $('#modaldemo9').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var name = button.data('name')
-            var modal = $(this)
-            modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #name').val(name);
-        })
-    </script>
 @endsection

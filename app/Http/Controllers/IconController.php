@@ -52,9 +52,9 @@ class IconController extends Controller
 
     }
 
-    public function delete($id){
+    public function delete(Request $request){
     
-        return $this->iconInterface->delete($id);
+        return $this->iconInterface->delete($request);
     }
     
 }

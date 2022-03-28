@@ -44,6 +44,10 @@
 						<div class="card">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
+								<div class="col-sm-6 col-md-4 col-xl-3">
+										<a class="modal-effect btn btn-outline-primary btn-block"   href="{{ url('links/create')}}">  Add Link   </a>
+									</div>
+
 								
 									<i class="mdi mdi-dots-horizontal text-gray"></i>
 								</div>
@@ -73,17 +77,22 @@
 												<td><img src="{{asset('images\icons'.'/'.$link->icon->icon)}}"/></td>
 												<td>{{Auth::user()->name}}</td>
 												
-												<td>
+												<td class="text-center">
 
                                           <a class=" btn btn-sm btn-info"  href="{{url('links/edit',[$link->id])}}"
                                  title="update"><i class="las la-pen"></i></a>
 
-								 <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
- data-id="{{ $link->id }}" data-name="{{ $link->platform_name }}" data-toggle="modal"
- href="#modaldemo9" title="delete"><i class="las la-trash"></i></a>
-
-                                     </td>
-
+								
+												</td>
+												<td>
+                                                        <form method="post"  action="{{url('links/delete') }}">
+                                                            @csrf 
+                                                            @method('DELETE')
+                                                            <input type="hidden"name="link_id" value="{{$link->id}}">
+                                                        <button class="btn  btn-sm btn-danger">   
+														<i class="las la-trash"></i>
+                                                        </button>
+                                                     </form>
 						
 			 
 											</tr>
@@ -98,35 +107,6 @@
 
 
 			
-				 <!--  delete form  -->
-		 <div class="modal" id="modaldemo9" >
-			<div class="modal-dialog" role="document">
-				<div class="modal-content modal-content-demo">
-					<div class="modal-header">
-						<h6 class="modal-title">Delete </h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-                    <form   method="post" action="{{url('links/delete',[$link->id])}}" autocomplete="off">
-					     @method('delete')
-                         @csrf
-						 <div class="modal-body">
-                                        <p>    Are you sure you want to delete this link ?    </p><br>
-                                        <input type="hidden" name="id" id="id">
-                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-                                        <button type="submit" class="btn btn-danger">yes</button>
-                                    </div>
-                                    
-					
-                </form>	
-            </div>
-				</div>  
-			</div>
-		</div>
-	
-		
 
      
 
@@ -140,14 +120,5 @@
 		<!-- main-content closed -->
 @endsection
 @section('js')
-<script>
-        $('#modaldemo9').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var name = button.data('name')
-            var modal = $(this)
-            modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #name').val(name);
-        })
-    </script>
+
 @endsection

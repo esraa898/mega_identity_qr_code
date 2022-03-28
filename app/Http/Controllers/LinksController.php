@@ -46,8 +46,8 @@ class LinksController extends Controller
 
     }
 
-    public function delete($id){
+    public function delete(Request $request){
     
-        return $this->linksInterface->delete($id);
+        return $this->linksInterface->delete($request);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Interfaces\HomeInterface;
 
 class HomeController extends Controller
 {
@@ -11,8 +11,12 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+     protected $HomeInterface; 
+    public function __construct( HomeInterface $homeInterface)
+
     {
+        $this->HomeInterface=$homeInterface;
         $this->middleware('auth');
     }
 
@@ -23,6 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users/user');
+
+        return $this->HomeInterface->index();
     }
 }
