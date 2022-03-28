@@ -30,15 +30,15 @@ class LinksRepository implements LinksInterface{
     $request->validate([
       'platform_url' => 'required|url',
       'platform_name' => 'required|max:50',
-      'user_id' => 'required|exists:users,id',
+     
             
     ]);
     Link::create(
    [
     'platform_url' => $request->platform_url,
     'platform_name' => $request->platform_name,
-     'icon_id'=>$request->icon_id,
-    'user_id' => Auth::user()->id,
+    'icon_id'=>$request->icon_id,
+     'user_id' => Auth::user()->id,
    ]);
      Session()->flash('done', 'The Link added successfully!');
      return  redirect('links');
