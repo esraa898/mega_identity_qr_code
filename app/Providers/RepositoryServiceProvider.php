@@ -46,6 +46,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Http\Interfaces\HomeInterface',
             'App\Http\Repositories\HomeRepository'
         );
+        $this->app->bind(
+            'App\Http\Interfaces\RegisterInterface',
+            'App\Http\Repositories\RegisterRepository'
+        );
     }
 
     /**
