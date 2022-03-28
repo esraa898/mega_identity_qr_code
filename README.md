@@ -21,6 +21,18 @@ routes documintation :
 
 /admin/users   --->  get table contain all users .
 
-/admin/userlinks/{link->id}   -----> 
+/admin/userlinks/{link->id}   -----> get the chosen user from all users table links .
+
+/admin/rolechange/{user->id}    ------> get the page to edit user role
+
+/admin/rolechange/        -------> change user rules to admin and viceversa.
+
+---------------------------------
+
+/user    ------> table contain user details and alink routes to user links .
+
+/user/update/{user->id}   ------> 
+
+
 
 
