@@ -89,10 +89,10 @@
                                                             @csrf 
                                                             @method('DELETE')
                                                             <input type="hidden"name="link_id" value="{{$link->id}}">
-                                                        <button class="btn  btn-sm btn-danger">   
-														<i class="las la-trash"></i>
-                                                        </button>
-                                                     </form>
+                                                           <button class="btn  btn-sm btn-danger">   
+														     <i class="las la-trash"></i>
+                                                                </button>
+                                                        </form>
 						
 			 
 											</tr>

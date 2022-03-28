@@ -55,34 +55,35 @@
 								
 							</div>
 							<div class="card-body pt-0">
-								<form  method="POST" action="{{url('admin/rolechange')}}"  >
-                                    @method  ('PUT')
+								<form  method="POST" action="{{url('links\update',[$link->id])}}"  >
+                                  
+									@method  ('PUT')
                                     @csrf
 									<div class="form-group">
-									<input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
-                                    <label class="form-label mg-b-0"> Name</label>
-										<input type="text" class="form-control" id="name" name="name"  >
-									</div>
+										<input type="hidden" id="user_id" name="user_id"  value="{{$link->user->id}}">
+										<div class="form-group">
+											<label >platform_url </label>
+											<input type="text" class="form-control" id="platform_url" name="platform_url"  value="{{$link->platform_url}}" >
+										</div>
+                                        <div class="form-group">
+											<label >platform name </label>
+											<input type="text" class="form-control" id="platform_name" name="platform_name" value="{{$link->platform_name}}" >
+										</div>
+                                    
+                                        <div class="form-group">
+                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
+										
+                                        <select name="icon_id" id="icon_id" class="form-control" >
+                                            <option value="{{$link->icon->id}}" selected > {{$link->icon->name}}   </option>
+                                              @foreach($icons as $icon)
+						
+											  <option value="{{ $icon->id }}"  data-subtext="<img src={{asset('images/'. $icon->icon)}}/>">{{$icon->name}}</option>
 
-                                    <div class="checkbox">
-                                    <label class="form-label mg-b-0"> email</label>
-									<input type="text" class="form-control" id="email" name="email" >
+                                            @endforeach
+                                        </select>
+                                        </div>
 								
 									</div>
-									<div class="checkbox">
-                                    <label class="form-label mg-b-0">		
-								   <input type="checkbox" name="roles[]" value="Superadmin" {{ $user->hasRole('Superadmin') ?  'checked' : '' }}>
-								  			Superadmin</label>
-									</div>
-									<div class="form-group">
-                                     <label class="form-label mg-b-0">
-									
-								   <input type="checkbox" name="roles[]" value="user" {{$user->hasRole('user') ?  'checked' : '' }}>  user
-								
-								
-								</label>
-									</div>
-							
 									<button type="submit" class="btn btn-primary mt-3 mb-0">Update </button>
 								</form>
 							</div>
