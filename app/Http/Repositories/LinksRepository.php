@@ -30,7 +30,7 @@ class LinksRepository implements LinksInterface{
     $request->validate([
       'platform_url' => 'required|url',
       'platform_name' => 'required|max:50',
-     
+      'user_id' => 'required|exists:users,id',
             
     ]);
     Link::create(
