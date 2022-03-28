@@ -28,8 +28,9 @@ class LinksRepository implements LinksInterface{
   public function store( $request)
   {
     $request->validate([
-            'platform_url' => 'required',
-            'platform_name' => 'required',
+      'platform_url' => 'required|url',
+      'platform_name' => 'required|max:50',
+      'user_id' => 'required|exists:users,id',
             
     ]);
     Link::create(
@@ -55,9 +56,9 @@ class LinksRepository implements LinksInterface{
   public function update( $request, $id)
   {
     $request->validate([
-            'platform_url' => 'required',
-            'platform_name' => 'required',
-            'user_id' => 'required',
+            'platform_url' => 'required|url',
+            'platform_name' => 'required|max:50',
+            'user_id' => 'required|exists:users,id',
     ]);
     $link = Link::find($id);
     $link->update([
