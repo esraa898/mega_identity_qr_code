@@ -3,6 +3,7 @@ namespace App\Http\Repositories;
 
 use App\Models\link;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Interfaces\RoleAdminInterface;
 
 class RoleAdminRepository implements RoleAdminInterface{
@@ -17,9 +18,10 @@ class RoleAdminRepository implements RoleAdminInterface{
     }
 
     public function links($id){
+      $user_id= $id;
       $links= link::with('icon')->where('user_id',$id)->get();
 
-      return view('links.userlinks',compact('links'));
+      return view('Admin.userlinks',compact('links','user_id'));
     }
 
 
@@ -29,6 +31,8 @@ class RoleAdminRepository implements RoleAdminInterface{
 
     }
 
+
+    
     public function roleChange($request , $user){
   
 

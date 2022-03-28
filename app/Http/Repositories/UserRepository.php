@@ -21,8 +21,11 @@ class UserRepository implements UserInterface {
   
    
     public function update( $request, $id)
-    {$user = User::find($id);
-        if($request->has('photo')){
+
+    {
+        $user = User::find($id);
+        if(
+            $request->has('photo')){
 
             $fileName= time().'username.png';
             $oldfile= 'images\\'.$request->name.'\\'.$user->photo;
